@@ -122,33 +122,59 @@ Message endpoint: http://localhost:3000/message
 
 ### 安装方式
 
-#### 方式一：本地使用（推荐用于开发）
+#### ⭐ 方式一：使用 npm 包（推荐，最简单）
+
+包已发布到 npm，可以直接使用：
 
 ```bash
-# 1. 安装依赖
+# 通过 npx 直接运行（推荐，无需安装）
+npx sse-email-mcp-server
+
+# 或全局安装后使用
+npm install -g sse-email-mcp-server
+sse-email-mcp
+```
+
+**在 MCP 客户端配置中使用：**
+
+```json
+{
+  "mcpServers": {
+    "sse-email-mcp": {
+      "command": "npx",
+      "args": ["-y", "sse-email-mcp-server"]
+    }
+  }
+}
+```
+
+#### 方式二：本地开发（从 GitHub 克隆）
+
+```bash
+# 1. 克隆项目
+git clone https://github.com/1018053166/sse-email-mcp-server.git
+cd sse-email-mcp-server
+
+# 2. 安装依赖
 npm install
 
-# 2. 启动服务器
+# 3. 启动服务器
 npm start
 # 或
 node bin/sse-email-mcp.js
 ```
 
-#### 方式二：通过 npx 运行（需要先发布到 npm）
+**在 MCP 客户端配置中使用：**
 
-```bash
-# 通过 npx 直接运行（推荐）
-npx sse-email-mcp-server
-```
-
-#### 方式三：全局安装
-
-```bash
-# 全局安装
-npm install -g sse-email-mcp-server
-
-# 运行
-sse-email-mcp
+```json
+{
+  "mcpServers": {
+    "sse-email-mcp": {
+      "command": "node",
+      "args": ["/absolute/path/to/sse-email-mcp-server/bin/sse-email-mcp.js"]
+    }
+  }
+}
 ```
 
 ### 配置
@@ -164,9 +190,9 @@ EMAIL_PROVIDER=gmail
 PORT=3000
 ```
 
-#### 方式二：配置文件
+#### 方式二：配置文件（本地开发时使用）
 
-复制 `config.example.json` 为 `config.json` 并修改：
+如果从 GitHub 克隆项目进行本地开发，可以复制 `config.example.json` 为 `config.json` 并修改：
 
 ```json
 {
@@ -181,6 +207,8 @@ PORT=3000
 配置文件可以放在以下位置之一：
 - 项目根目录：`config.json` 或 `.config.json`
 - 项目根目录的上一级：`../config.json`
+
+**注意：** 如果使用 npm 包（npx 方式），推荐在 MCP 客户端配置中使用环境变量，而不是配置文件。
 
 ### 启动服务器
 
@@ -224,9 +252,61 @@ node -e "require('fs-extra'); console.log('✓ fs-extra installed')"
 
 #### 配置方式
 
-**方式一：使用环境变量（可选）**
+**⭐ 推荐方式：使用 npm 安装（最简单）**
 
-如果希望在 mcp.json 中配置认证信息，可以这样设置：
+包已发布到 npm，推荐使用 npx 方式运行，无需手动安装或配置路径：
+
+```json
+{
+  "mcpServers": {
+    "sse-email-mcp": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "sse-email-mcp-server"
+      ],
+      "env": {
+        "EMAIL_USER": "your-email@gmail.com",
+        "EMAIL_PASS": "your-app-password",
+        "EMAIL_PROVIDER": "gmail"
+      }
+    }
+  }
+}
+```
+
+**优点：**
+- ✅ 无需手动安装，npx 会自动下载并运行
+- ✅ 无需配置路径，最简单方便
+- ✅ 自动使用最新版本
+- ✅ 跨平台兼容
+
+**如果已全局安装：**
+
+```bash
+npm install -g sse-email-mcp-server
+```
+
+配置如下：
+
+```json
+{
+  "mcpServers": {
+    "sse-email-mcp": {
+      "command": "sse-email-mcp",
+      "env": {
+        "EMAIL_USER": "your-email@gmail.com",
+        "EMAIL_PASS": "your-app-password",
+        "EMAIL_PROVIDER": "gmail"
+      }
+    }
+  }
+}
+```
+
+**方式二：使用本地路径（开发时使用）**
+
+如果从 GitHub 克隆项目进行开发，可以使用本地路径：
 
 ```json
 {
@@ -234,7 +314,7 @@ node -e "require('fs-extra'); console.log('✓ fs-extra installed')"
     "sse-email-mcp": {
       "command": "node",
       "args": [
-        "C:/Users/10180/Desktop/sse-email-mcp-server/bin/sse-email-mcp.js"
+        "/absolute/path/to/sse-email-mcp-server/bin/sse-email-mcp.js"
       ],
       "env": {
         "EMAIL_USER": "your-email@gmail.com",
@@ -249,9 +329,9 @@ node -e "require('fs-extra'); console.log('✓ fs-extra installed')"
 **注意**：
 - `args` 中的路径必须是**绝对路径**
 - Windows 路径可以使用正斜杠 `/` 或反斜杠 `\`
-- `env` 中的认证信息是**可选的**，如果未配置，可以在工具调用时传递
+- 需要先运行 `npm install` 安装依赖
 
-**方式二：不配置环境变量（推荐，更安全）**
+**方式三：不配置环境变量（推荐，更安全）**
 
 如果不想在配置文件中存储敏感信息，可以完全不配置 `env`：
 
@@ -259,9 +339,10 @@ node -e "require('fs-extra'); console.log('✓ fs-extra installed')"
 {
   "mcpServers": {
     "sse-email-mcp": {
-      "command": "node",
+      "command": "npx",
       "args": [
-        "C:/Users/10180/Desktop/sse-email-mcp-server/bin/sse-email-mcp.js"
+        "-y",
+        "sse-email-mcp-server"
       ]
     }
   }
@@ -294,45 +375,7 @@ node -e "require('fs-extra'); console.log('✓ fs-extra installed')"
 
 #### 实际配置示例
 
-**Windows 配置示例**
-
-```json
-{
-  "mcpServers": {
-    "sse-email-mcp": {
-      "command": "node",
-      "args": [
-        "C:/Users/10180/Desktop/sse-email-mcp-server/bin/sse-email-mcp.js"
-      ],
-      "env": {
-        "EMAIL_USER": "your-email@gmail.com",
-        "EMAIL_PASS": "your-app-password"
-      }
-    }
-  }
-}
-```
-
-**macOS/Linux 配置示例**
-
-```json
-{
-  "mcpServers": {
-    "sse-email-mcp": {
-      "command": "node",
-      "args": [
-        "/Users/yourname/sse-email-mcp-server/bin/sse-email-mcp.js"
-      ],
-      "env": {
-        "EMAIL_USER": "your-email@gmail.com",
-        "EMAIL_PASS": "your-app-password"
-      }
-    }
-  }
-}
-```
-
-**使用 npx（如果已发布到 npm）**
+**⭐ 推荐配置：使用 npm 包（最简单）**
 
 ```json
 {
@@ -345,6 +388,47 @@ node -e "require('fs-extra'); console.log('✓ fs-extra installed')"
       ],
       "env": {
         "EMAIL_USER": "your-email@gmail.com",
+        "EMAIL_PASS": "your-app-password",
+        "EMAIL_PROVIDER": "gmail"
+      }
+    }
+  }
+}
+```
+
+**全局安装后的配置**
+
+如果已运行 `npm install -g sse-email-mcp-server`：
+
+```json
+{
+  "mcpServers": {
+    "sse-email-mcp": {
+      "command": "sse-email-mcp",
+      "env": {
+        "EMAIL_USER": "your-email@gmail.com",
+        "EMAIL_PASS": "your-app-password",
+        "EMAIL_PROVIDER": "gmail"
+      }
+    }
+  }
+}
+```
+
+**本地开发配置（从 GitHub 克隆）**
+
+Windows 示例：
+
+```json
+{
+  "mcpServers": {
+    "sse-email-mcp": {
+      "command": "node",
+      "args": [
+        "C:/Users/yourname/sse-email-mcp-server/bin/sse-email-mcp.js"
+      ],
+      "env": {
+        "EMAIL_USER": "your-email@gmail.com",
         "EMAIL_PASS": "your-app-password"
       }
     }
@@ -352,15 +436,15 @@ node -e "require('fs-extra'); console.log('✓ fs-extra installed')"
 }
 ```
 
-**使用本地路径的 npx（无需发布）**
+macOS/Linux 示例：
 
 ```json
 {
   "mcpServers": {
     "sse-email-mcp": {
-      "command": "npx",
+      "command": "node",
       "args": [
-        "/absolute/path/to/sse-email-mcp-server"
+        "/Users/yourname/sse-email-mcp-server/bin/sse-email-mcp.js"
       ],
       "env": {
         "EMAIL_USER": "your-email@gmail.com",
@@ -419,7 +503,7 @@ node -e "require('fs-extra'); console.log('✓ fs-extra installed')"
 }
 ```
 
-**使用 npx 的 Cursor 配置（推荐，无需本地安装）**
+**使用 npm 包的 Cursor 配置（⭐ 推荐，最简单）**
 
 ```json
 {
@@ -440,19 +524,26 @@ node -e "require('fs-extra'); console.log('✓ fs-extra installed')"
 }
 ```
 
+**优点：**
+- ✅ 无需手动安装，npx 自动下载并运行
+- ✅ 无需配置路径
+- ✅ 自动使用最新版本
+- ✅ 跨平台兼容
+
 #### 不同邮箱服务商配置示例
 
 以下展示了所有支持的邮箱服务商的配置方式：
 
-**Gmail 配置**
+**Gmail 配置（推荐使用 npm 包）**
 
 ```json
 {
   "mcpServers": {
     "sse-email-mcp": {
-      "command": "node",
+      "command": "npx",
       "args": [
-        "/path/to/sse-email-mcp-server/bin/sse-email-mcp.js"
+        "-y",
+        "sse-email-mcp-server"
       ],
       "env": {
         "EMAIL_USER": "your-email@gmail.com",
@@ -464,15 +555,16 @@ node -e "require('fs-extra'); console.log('✓ fs-extra installed')"
 }
 ```
 
-**Outlook/Office365 配置**
+**Outlook/Office365 配置（推荐使用 npm 包）**
 
 ```json
 {
   "mcpServers": {
     "sse-email-mcp": {
-      "command": "node",
+      "command": "npx",
       "args": [
-        "/path/to/sse-email-mcp-server/bin/sse-email-mcp.js"
+        "-y",
+        "sse-email-mcp-server"
       ],
       "env": {
         "EMAIL_USER": "your-email@outlook.com",
@@ -484,15 +576,16 @@ node -e "require('fs-extra'); console.log('✓ fs-extra installed')"
 }
 ```
 
-**QQ 邮箱配置**
+**QQ 邮箱配置（推荐使用 npm 包）**
 
 ```json
 {
   "mcpServers": {
     "sse-email-mcp": {
-      "command": "node",
+      "command": "npx",
       "args": [
-        "/path/to/sse-email-mcp-server/bin/sse-email-mcp.js"
+        "-y",
+        "sse-email-mcp-server"
       ],
       "env": {
         "EMAIL_USER": "your-email@qq.com",
@@ -504,15 +597,16 @@ node -e "require('fs-extra'); console.log('✓ fs-extra installed')"
 }
 ```
 
-**163 邮箱配置**
+**163 邮箱配置（推荐使用 npm 包）**
 
 ```json
 {
   "mcpServers": {
     "sse-email-mcp": {
-      "command": "node",
+      "command": "npx",
       "args": [
-        "/path/to/sse-email-mcp-server/bin/sse-email-mcp.js"
+        "-y",
+        "sse-email-mcp-server"
       ],
       "env": {
         "EMAIL_USER": "your-email@163.com",
@@ -524,15 +618,16 @@ node -e "require('fs-extra'); console.log('✓ fs-extra installed')"
 }
 ```
 
-**126 邮箱配置**
+**126 邮箱配置（推荐使用 npm 包）**
 
 ```json
 {
   "mcpServers": {
     "sse-email-mcp": {
-      "command": "node",
+      "command": "npx",
       "args": [
-        "/path/to/sse-email-mcp-server/bin/sse-email-mcp.js"
+        "-y",
+        "sse-email-mcp-server"
       ],
       "env": {
         "EMAIL_USER": "your-email@126.com",
@@ -544,15 +639,16 @@ node -e "require('fs-extra'); console.log('✓ fs-extra installed')"
 }
 ```
 
-**Sina 邮箱配置**
+**Sina 邮箱配置（推荐使用 npm 包）**
 
 ```json
 {
   "mcpServers": {
     "sse-email-mcp": {
-      "command": "node",
+      "command": "npx",
       "args": [
-        "/path/to/sse-email-mcp-server/bin/sse-email-mcp.js"
+        "-y",
+        "sse-email-mcp-server"
       ],
       "env": {
         "EMAIL_USER": "your-email@sina.com",
@@ -564,15 +660,16 @@ node -e "require('fs-extra'); console.log('✓ fs-extra installed')"
 }
 ```
 
-**自定义邮箱配置**
+**自定义邮箱配置（推荐使用 npm 包）**
 
 ```json
 {
   "mcpServers": {
     "sse-email-mcp": {
-      "command": "node",
+      "command": "npx",
       "args": [
-        "/path/to/sse-email-mcp-server/bin/sse-email-mcp.js"
+        "-y",
+        "sse-email-mcp-server"
       ],
       "env": {
         "EMAIL_USER": "your-email@example.com",
@@ -656,14 +753,14 @@ node -e "require('fs-extra'); console.log('✓ fs-extra installed')"
 配置完成后，**重启客户端**（Cursor 或 Claude Desktop），MCP 服务器将自动加载。
 
 **示例配置文件：**
-- `mcp.example.json` - 使用本地 Node.js 运行的配置示例（推荐用于开发）
-- `mcp.example.npx.json` - 使用 npx 运行已发布到 npm 的包（需要先发布）
-- `mcp.example.local.json` - 使用 npx 运行本地项目（无需发布）
+- `mcp.example.npm.json` - ⭐ **推荐**：使用 npm 包（npx 方式，最简单）
+- `mcp.example.json` - 使用本地 Node.js 运行的配置示例（开发时使用）
+- `mcp.example.npx.json` - 使用 npx 运行已发布到 npm 的包
+- `mcp.example.local.json` - 使用 npx 运行本地项目
 
-**关于发布到 npm：**
-- 如果包已发布到 npm，可以使用 `mcp.example.npx.json` 的配置方式
-- 如果包未发布，使用 `mcp.example.json` 或 `mcp.example.local.json`
-- 详细发布指南请参考 [PUBLISH.md](./PUBLISH.md)
+**推荐使用方式：**
+- ✅ **生产环境**：使用 `mcp.example.npm.json`，通过 npx 运行 npm 包（推荐）
+- ✅ **开发环境**：使用 `mcp.example.json`，从 GitHub 克隆后本地运行
 
 **重要提示：使用前必须安装依赖！**
 

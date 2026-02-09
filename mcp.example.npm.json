@@ -16,8 +16,12 @@
 }
 
 说明：
-1. ⭐ 这是推荐配置方式，使用 npx 运行已发布到 npm 的包
+1. 这是推荐配置方式，使用 npx 运行已发布到 npm 的包
 2. 首次运行会自动下载并安装包，后续运行会使用缓存
 3. 无需手动安装，无需配置路径，最简单方便
-4. 包已发布到 npm：npm install sse-email-mcp-server
-5. env 中的认证信息是可选的，可以在工具调用时传递 auth 参数
+4. env 中的认证信息是可选的，可以在工具调用时传递 auth 参数
+5. 如果已全局安装（npm install -g sse-email-mcp-server），也可以使用：
+   {
+     "command": "sse-email-mcp",
+     "env": { ... }
+   }
