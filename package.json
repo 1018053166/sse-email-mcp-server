@@ -1,6 +1,6 @@
 {
   "name": "sse-email-mcp-server",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "基于 MCP 协议的邮件服务器，支持 SMTP/IMAP/POP3 协议，可发送和接收邮件。支持 Gmail、Outlook、QQ、163、126、Sina 等主流邮箱服务商，支持附件、HTML/文本格式，动态认证。完美集成 Cursor、Claude Desktop 等 AI 助手，实现邮件自动化处理。",
   "main": "src/server.js",
   "bin": {
