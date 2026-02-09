@@ -1,7 +1,7 @@
 {
   "name": "sse-email-mcp-server",
   "version": "1.0.2",
-  "description": "SSE MCP server for email sending and receiving with SMTP/IMAP/POP3 support",
+  "description": "MCP server for email operations: send/receive emails via SMTP/IMAP/POP3, support Gmail/Outlook/QQ/163/126/Sina, with attachment support, HTML/text format, and dynamic auth. Perfect for AI assistants (Cursor/Claude Desktop) to handle email tasks.",
   "main": "src/server.js",
   "bin": {
     "sse-email-mcp": "bin/sse-email-mcp.js"
