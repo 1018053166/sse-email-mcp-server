@@ -68,7 +68,7 @@
 
 ```bash
 # 如果使用 git
-git clone <repository-url>
+git clone https://github.com/1018053166/sse-email-mcp-server.git
 cd sse-email-mcp-server
 
 # 或直接下载 ZIP 文件并解压
@@ -376,6 +376,223 @@ node -e "require('fs-extra'); console.log('✓ fs-extra installed')"
 - Windows 路径格式：可以使用 `C:/path/to/file` 或 `C:\path\to\file`
 - 认证信息可选：现在支持在工具调用时传递，不一定需要在 env 中配置
 - 安全性：如果不想在配置文件中存储密码，可以不配置 env，每次调用时传递
+
+#### 不同客户端配置示例
+
+**Cursor 编辑器配置（macOS）**
+
+```json
+{
+  "mcpServers": {
+    "sse-email-mcp": {
+      "command": "node",
+      "args": [
+        "/Users/yourname/sse-email-mcp-server/bin/sse-email-mcp.js"
+      ],
+      "env": {
+        "EMAIL_USER": "your-email@gmail.com",
+        "EMAIL_PASS": "your-app-password",
+        "EMAIL_PROVIDER": "gmail"
+      }
+    }
+  }
+}
+```
+
+**Claude Desktop 配置（Windows）**
+
+```json
+{
+  "mcpServers": {
+    "sse-email-mcp": {
+      "command": "node",
+      "args": [
+        "C:\\Users\\yourname\\sse-email-mcp-server\\bin\\sse-email-mcp.js"
+      ],
+      "env": {
+        "EMAIL_USER": "your-email@outlook.com",
+        "EMAIL_PASS": "your-app-password",
+        "EMAIL_PROVIDER": "outlook"
+      }
+    }
+  }
+}
+```
+
+**使用 npx 的 Cursor 配置（推荐，无需本地安装）**
+
+```json
+{
+  "mcpServers": {
+    "sse-email-mcp": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "sse-email-mcp-server"
+      ],
+      "env": {
+        "EMAIL_USER": "your-email@qq.com",
+        "EMAIL_PASS": "your-authorization-code",
+        "EMAIL_PROVIDER": "qq"
+      }
+    }
+  }
+}
+```
+
+#### 不同邮箱服务商配置示例
+
+以下展示了所有支持的邮箱服务商的配置方式：
+
+**Gmail 配置**
+
+```json
+{
+  "mcpServers": {
+    "sse-email-mcp": {
+      "command": "node",
+      "args": [
+        "/path/to/sse-email-mcp-server/bin/sse-email-mcp.js"
+      ],
+      "env": {
+        "EMAIL_USER": "your-email@gmail.com",
+        "EMAIL_PASS": "your-app-password",
+        "EMAIL_PROVIDER": "gmail"
+      }
+    }
+  }
+}
+```
+
+**Outlook/Office365 配置**
+
+```json
+{
+  "mcpServers": {
+    "sse-email-mcp": {
+      "command": "node",
+      "args": [
+        "/path/to/sse-email-mcp-server/bin/sse-email-mcp.js"
+      ],
+      "env": {
+        "EMAIL_USER": "your-email@outlook.com",
+        "EMAIL_PASS": "your-app-password",
+        "EMAIL_PROVIDER": "outlook"
+      }
+    }
+  }
+}
+```
+
+**QQ 邮箱配置**
+
+```json
+{
+  "mcpServers": {
+    "sse-email-mcp": {
+      "command": "node",
+      "args": [
+        "/path/to/sse-email-mcp-server/bin/sse-email-mcp.js"
+      ],
+      "env": {
+        "EMAIL_USER": "your-email@qq.com",
+        "EMAIL_PASS": "your-authorization-code",
+        "EMAIL_PROVIDER": "qq"
+      }
+    }
+  }
+}
+```
+
+**163 邮箱配置**
+
+```json
+{
+  "mcpServers": {
+    "sse-email-mcp": {
+      "command": "node",
+      "args": [
+        "/path/to/sse-email-mcp-server/bin/sse-email-mcp.js"
+      ],
+      "env": {
+        "EMAIL_USER": "your-email@163.com",
+        "EMAIL_PASS": "your-password",
+        "EMAIL_PROVIDER": "163"
+      }
+    }
+  }
+}
+```
+
+**126 邮箱配置**
+
+```json
+{
+  "mcpServers": {
+    "sse-email-mcp": {
+      "command": "node",
+      "args": [
+        "/path/to/sse-email-mcp-server/bin/sse-email-mcp.js"
+      ],
+      "env": {
+        "EMAIL_USER": "your-email@126.com",
+        "EMAIL_PASS": "your-password",
+        "EMAIL_PROVIDER": "126"
+      }
+    }
+  }
+}
+```
+
+**Sina 邮箱配置**
+
+```json
+{
+  "mcpServers": {
+    "sse-email-mcp": {
+      "command": "node",
+      "args": [
+        "/path/to/sse-email-mcp-server/bin/sse-email-mcp.js"
+      ],
+      "env": {
+        "EMAIL_USER": "your-email@sina.com",
+        "EMAIL_PASS": "your-password",
+        "EMAIL_PROVIDER": "sina"
+      }
+    }
+  }
+}
+```
+
+**自定义邮箱配置**
+
+```json
+{
+  "mcpServers": {
+    "sse-email-mcp": {
+      "command": "node",
+      "args": [
+        "/path/to/sse-email-mcp-server/bin/sse-email-mcp.js"
+      ],
+      "env": {
+        "EMAIL_USER": "your-email@example.com",
+        "EMAIL_PASS": "your-password",
+        "EMAIL_PROVIDER": "custom",
+        "SMTP_HOST": "smtp.example.com",
+        "SMTP_PORT": "587",
+        "IMAP_HOST": "imap.example.com",
+        "IMAP_PORT": "993"
+      }
+    }
+  }
+}
+```
+
+**注意：**
+- Gmail 和 Outlook 需要使用**应用专用密码**，不是普通密码
+- QQ 邮箱需要使用**授权码**，需要在 QQ 邮箱设置中开启 SMTP/IMAP 服务后获取
+- 163、126、Sina 邮箱使用普通密码即可
+- 如果不想在配置文件中存储密码，可以不配置 `env`，在每次工具调用时通过 `auth` 参数传递
 
 #### 验证配置
 
@@ -789,7 +1006,7 @@ SMTP_PASS=your-password
   "license": "MIT",                // 许可证
   "repository": {                   // 仓库信息（推荐）
     "type": "git",
-    "url": "https://github.com/yourusername/sse-email-mcp-server.git"
+    "url": "https://github.com/1018053166/sse-email-mcp-server.git"
   },
   "keywords": [...],                // 关键词
   "bin": {                         // 确保 bin 字段正确
@@ -1522,9 +1739,9 @@ npm start
 
 ## 📞 支持
 
-- 📧 提交 Issue：[GitHub Issues](https://github.com/your-repo/sse-email-mcp-server/issues)
+- 📧 提交 Issue：[GitHub Issues](https://github.com/1018053166/sse-email-mcp-server/issues)
 - 📖 查看文档：[完整文档](./README.md)
-- 💬 讨论交流：[GitHub Discussions](https://github.com/your-repo/sse-email-mcp-server/discussions)
+- 💬 讨论交流：[GitHub Discussions](https://github.com/1018053166/sse-email-mcp-server/discussions)
 
 ## 🙏 致谢
 
