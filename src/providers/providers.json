@@ -1,0 +1,119 @@
+{
+  "gmail": {
+    "smtp": {
+      "host": "smtp.gmail.com",
+      "port": 587,
+      "secure": false,
+      "requireTLS": true
+    },
+    "imap": {
+      "host": "imap.gmail.com",
+      "port": 993,
+      "secure": true,
+      "tls": true
+    },
+    "pop3": {
+      "host": "pop.gmail.com",
+      "port": 995,
+      "secure": true,
+      "tls": true
+    }
+  },
+  "outlook": {
+    "smtp": {
+      "host": "smtp.office365.com",
+      "port": 587,
+      "secure": false,
+      "requireTLS": true
+    },
+    "imap": {
+      "host": "outlook.office365.com",
+      "port": 993,
+      "secure": true,
+      "tls": true
+    },
+    "pop3": {
+      "host": "outlook.office365.com",
+      "port": 995,
+      "secure": true,
+      "tls": true
+    }
+  },
+  "qq": {
+    "smtp": {
+      "host": "smtp.qq.com",
+      "port": 587,
+      "secure": false,
+      "requireTLS": true
+    },
+    "imap": {
+      "host": "imap.qq.com",
+      "port": 993,
+      "secure": true,
+      "tls": true
+    },
+    "pop3": {
+      "host": "pop.qq.com",
+      "port": 995,
+      "secure": true,
+      "tls": true
+    }
+  },
+  "163": {
+    "smtp": {
+      "host": "smtp.163.com",
+      "port": 25,
+      "secure": false
+    },
+    "imap": {
+      "host": "imap.163.com",
+      "port": 993,
+      "secure": true,
+      "tls": true
+    },
+    "pop3": {
+      "host": "pop.163.com",
+      "port": 995,
+      "secure": true,
+      "tls": true
+    }
+  },
+  "126": {
+    "smtp": {
+      "host": "smtp.126.com",
+      "port": 25,
+      "secure": false
+    },
+    "imap": {
+      "host": "imap.126.com",
+      "port": 993,
+      "secure": true,
+      "tls": true
+    },
+    "pop3": {
+      "host": "pop.126.com",
+      "port": 995,
+      "secure": true,
+      "tls": true
+    }
+  },
+  "sina": {
+    "smtp": {
+      "host": "smtp.sina.com",
+      "port": 25,
+      "secure": false
+    },
+    "imap": {
+      "host": "imap.sina.com",
+      "port": 993,
+      "secure": true,
+      "tls": true
+    },
+    "pop3": {
+      "host": "pop.sina.com",
+      "port": 995,
+      "secure": true,
+      "tls": true
+    }
+  }
+}

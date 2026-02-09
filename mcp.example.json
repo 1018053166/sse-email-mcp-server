@@ -1,0 +1,20 @@
+{
+  "mcpServers": {
+    "sse-email-mcp": {
+      "command": "node",
+      "args": [
+        "C:/Users/10180/Desktop/sse-email-mcp-server/bin/sse-email-mcp.js"
+      ],
+      "env": {
+        "EMAIL_USER": "your-email@example.com",
+        "EMAIL_PASS": "your-app-password",
+        "EMAIL_PROVIDER": "gmail"
+      }
+    }
+  }
+}
+
+注意：
+1. args 中的路径必须是绝对路径（Windows 使用正斜杠或反斜杠都可以）
+2. env 中的认证信息是可选的，现在可以直接在工具调用时传递 auth 参数
+3. 如果 env 中配置了认证信息，工具调用时未传递 auth，则会使用 env 中的配置

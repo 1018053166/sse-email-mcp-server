@@ -1,0 +1,45 @@
+{
+  "name": "sse-email-mcp-server",
+  "version": "1.0.1",
+  "description": "SSE MCP server for email sending and receiving with SMTP/IMAP/POP3 support",
+  "main": "src/server.js",
+  "bin": {
+    "sse-email-mcp": "bin/sse-email-mcp.js"
+  },
+  "scripts": {
+    "start": "node bin/sse-email-mcp.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "mcp",
+    "sse",
+    "email",
+    "smtp",
+    "imap",
+    "pop3",
+    "nodemailer",
+    "mail",
+    "server-sent-events"
+  ],
+  "author": "",
+  "license": "MIT",
+  "files": [
+    "bin",
+    "src",
+    "config.example.json",
+    "README.md"
+  ],
+  "dependencies": {
+    "nodemailer": "^8.0.0",
+    "imap": "^0.8.17",
+    "mailparser": "^3.6.5",
+    "dotenv": "^16.4.5",
+    "fs-extra": "^11.2.0"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "overrides": {
+    "semver": "^7.6.0"
+  }
+}

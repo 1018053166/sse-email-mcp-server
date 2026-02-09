@@ -1,0 +1,16 @@
+{
+  "mcpServers": {
+    "sse-email-mcp": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "sse-email-mcp-server"
+      ],
+      "env": {
+        "EMAIL_USER": "your-email@gmail.com",
+        "EMAIL_PASS": "your-app-password",
+        "EMAIL_PROVIDER": "gmail"
+      }
+    }
+  }
+}
